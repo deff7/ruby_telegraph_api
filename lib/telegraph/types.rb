@@ -1,0 +1,7 @@
+require 'telegraph/types/base'
+require 'telegraph/types/account'
+require 'telegraph/types/node'
+require 'telegraph/types/node_element'
+require 'telegraph/types/page'
+require 'telegraph/types/page_list'
+require 'telegraph/types/page_views'
