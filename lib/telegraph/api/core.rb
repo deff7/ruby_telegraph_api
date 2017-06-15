@@ -1,3 +1,4 @@
+require 'pp'
 module Telegraph
   module Core
     def self.request(method, params = {})
@@ -7,9 +8,11 @@ module Telegraph
       )
       conn.response :json
 
-      conn.get('/' + method) do |request|
+      response = conn.get('/' + method) do |request|
         request.params.merge!(params)
       end
+      pp response.env.url
+      response.body
     end
   end
 end
