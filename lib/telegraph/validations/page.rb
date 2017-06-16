@@ -14,7 +14,7 @@ module Telegraph
     CreatePageSchema = Dry::Validation.Schema(CommonPageSchema)
 
     EditPageSchema = Dry::Validation.Schema(CommonPageSchema) do
-      required(:page) { str? & filled? }
+      required(:path) { str? & filled? }
     end
 
     GetPageSchema = Dry::Validation.Schema do

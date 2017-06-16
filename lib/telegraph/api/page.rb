@@ -9,8 +9,14 @@ module Telegraph
       response
     end
 
-    def edit
-
+    def self.edit(params)
+      return nil unless EditPageSchema.(params).success?
+      path = params.delete(:path)
+      response = Telegraph::Core.request('editPage/' + path, params)
+      if response.dig('result', 'content')
+        response['result']['content'] = Types::Page.new(Hashie.symbolize_keys response['result'])
+      end
+      response
     end
 
     def self.get(params)
