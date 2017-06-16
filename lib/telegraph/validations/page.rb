@@ -21,5 +21,11 @@ module Telegraph
       required(:path) { str? & filled? }
       optional(:return_content) { bool? }
     end
+
+    GetPageListSchema = Dry::Validation.Schema do
+      required(:access_token) { str? & filled? }
+      optional(:offset) { int? }
+      optional(:limit) { int? & gteq?(0) & lteq?(200) }
+    end
   end
 end

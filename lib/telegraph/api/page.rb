@@ -22,8 +22,14 @@ module Telegraph
     def self.get(params)
       return nil unless GetPageSchema.(params).success?
       path = params.delete(:path)
-      res = Telegraph::Core.request('getPage/' + path, params)
-      Types::Page.new(Hashie.symbolize_keys res['result'])
+      response = Telegraph::Core.request('getPage/' + path, params)
+      Types::Page.new(Hashie.symbolize_keys response['result'])
+    end
+
+    def self.list(params)
+      return nil unless GetPageListSchema.(params).success?
+      response = Telegraph::Core.request('getPageList', params)
+      Types::PageList.new(Hashie.symbolize_keys response['result'])
     end
   end
 end

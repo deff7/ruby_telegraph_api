@@ -23,4 +23,12 @@ RSpec.describe Telegraph::Page do
       expect(result).not_to be nil
     end
   end
+
+  describe '#list' do
+    it 'fetch page list' do
+      result = Telegraph::Page.list(access_token: token, limit: 3)
+      expect(result).not_to be nil
+      pp result
+    end
+  end
 end
