@@ -1,15 +1,22 @@
 module Telegraph
   module Page
     def self.create(params)
-      res = Telegraph::Core.request('createPage', params)
+      return nil unless CreatePageSchema.(params).success?
+      response = Telegraph::Core.request('createPage', params)
+      if response.dig('result', 'content')
+        response['result']['content'] = Types::Page.new(Hashie.symbolize_keys response['result'])
+      end
+      response
     end
 
     def edit
 
     end
 
-    def self.get(path, return_content: true)
-      res = Telegraph::Core.request('getPage/' + path, {return_content: return_content})
+    def self.get(params)
+      return nil unless GetPageSchema.(params).success?
+      path = params.delete(:path)
+      res = Telegraph::Core.request('getPage/' + path, params)
       Types::Page.new(Hashie.symbolize_keys res['result'])
     end
   end

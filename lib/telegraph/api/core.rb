@@ -11,7 +11,6 @@ module Telegraph
       response = conn.get('/' + method) do |request|
         request.params.merge!(params)
       end
-      pp response.env.url
       response.body
     end
   end

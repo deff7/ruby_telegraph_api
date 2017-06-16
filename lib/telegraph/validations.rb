@@ -1,0 +1,1 @@
+require 'telegraph/validations/page'
