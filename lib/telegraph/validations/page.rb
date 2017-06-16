@@ -25,7 +25,15 @@ module Telegraph
     GetPageListSchema = Dry::Validation.Schema do
       required(:access_token) { str? & filled? }
       optional(:offset) { int? }
-      optional(:limit) { int? & gteq?(0) & lteq?(200) }
+      optional(:limit) { int? & size?(0..200) }
+    end
+
+    GetViewsSchema = Dry::Validation.Schema do
+      required(:path) { str? & filled? }
+      required(:year) { int? & included_in?(2000..2100) }
+      required(:month) { int? & included_in?(1..12) }
+      optional(:day) { int? & included_in?(1..31) }
+      optional(:hour) { int? & included_in?(0..24) }
     end
   end
 end

@@ -31,5 +31,12 @@ module Telegraph
       response = Telegraph::Core.request('getPageList', params)
       Types::PageList.new(Hashie.symbolize_keys response['result'])
     end
+
+    def self.views(params)
+      return nil unless GetViewsSchema.(params).success?
+      path = params.delete(:path)
+      response = Telegraph::Core.request('getViews/' + path, params)
+      Types::PageViews.new(Hashie.symbolize_keys response['result'])
+    end
   end
 end

@@ -28,7 +28,13 @@ RSpec.describe Telegraph::Page do
     it 'fetch page list' do
       result = Telegraph::Page.list(access_token: token, limit: 3)
       expect(result).not_to be nil
-      pp result
+    end
+  end
+
+  describe '#views' do
+    it 'get article views' do
+      result = Telegraph::Page.views(path: 'Sample-Page-12-15', year: 2016, month: 12)
+      expect(result).not_to be nil
     end
   end
 end
