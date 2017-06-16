@@ -12,8 +12,11 @@ module Telegraph
       Types::Account.new(Hashie.symbolize_keys response['result'])
     end
 
-    def self.info
-
+    def self.info(params)
+      return nil unless GetAccountInfoSchema.(params).success?
+      params[:fields] = params[:fields].to_s
+      response = Telegraph::Core.request('getAccountInfo', params)
+      Types::Account.new(Hashie.symbolize_keys response['result'])
     end
 
     def self.revoke_token(params)
