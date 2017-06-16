@@ -14,8 +14,11 @@ module Telegraph
 
     end
 
-    def self.revoke_token
-
+    def self.revoke_token(params)
+      return nil unless RevokeAccessTokenSchema.(params).success?
+      response = Telegraph::Core.request('revokeAccessToken', params)
+      return response['error'] if response['error']
+      Types::Account.new(Hashie.symbolize_keys response['result'])
     end
   end
 end
