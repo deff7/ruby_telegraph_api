@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 RSpec.describe Telegraph::Page do
   let!(:token) { 'b968da509bb76866c35425099bc0989a5ec3b32997d55286c657e6994bbb' }

@@ -10,7 +10,7 @@ module Telegraph
       required(:access_token) { str? }
       optional(:short_name) { str? & size?(1..32) }
       optional(:author_name) { str? & size?(0..128) }
-      optional(:author_url) { str? size?(0..512) }
+      optional(:author_url) { str? & size?(0..512) }
     end
 
     GetAccountInfoSchema = Dry::Validation.Schema do
