@@ -14,8 +14,14 @@ module Telegraph
     end
 
     GetAccountInfoSchema = Dry::Validation.Schema do
+      configure do
+        def valid_fields?(value)
+          (value - Telegraph::Types::Account::FIELDS).empty?
+        end
+      end
+
       required(:access_token) { str? }
-      optional(:fields) { array? }
+      optional(:fields) { valid_fields? }
     end
 
     RevokeAccessTokenSchema = Dry::Validation.Schema do
