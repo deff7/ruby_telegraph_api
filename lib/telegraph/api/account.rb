@@ -6,8 +6,10 @@ module Telegraph
       Types::Account.new(Hashie.symbolize_keys response['result'])
     end
 
-    def self.edit
-
+    def self.edit(params)
+      return nil unless EditAccountInfoSchema.(params).success?
+      response = Telegraph::Core.request('editAccountInfo', params)
+      Types::Account.new(Hashie.symbolize_keys response['result'])
     end
 
     def self.info
